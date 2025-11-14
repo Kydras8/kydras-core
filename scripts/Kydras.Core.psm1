@@ -1,37 +1,53 @@
+# ================================
 # Kydras.Core.psm1
-# Shared PowerShell helpers for Kydras environments.
+# Version: 1.1.1 (Path-only, no LiteralPath)
+# ================================
+
+Set-StrictMode -Version Latest
 
 function Say-Kydras {
+    [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
-        [string]
+        [Parameter(Mandatory = $true)]
+        [string]$Message
     )
-    Write-Host ("[Kydras] {0}" -f )
+    Write-Host ("[Kydras] {0}" -f $Message)
 }
 
 function Get-KydrasWorkspace {
+    [CmdletBinding()]
     param(
-        [string] = "C:\Users\kyler\Kydras-Repos"
+        [Parameter()]
+        [string]$DefaultPath = "$HOME\Kydras-Repos"
     )
-    if (Test-Path ) {
-        return (Resolve-Path ).Path
+
+    if (Test-Path -Path $DefaultPath) {
+        return (Resolve-Path -Path $DefaultPath).Path
     }
-    return C:\Users\kyler
+
+    return $HOME
 }
 
 function Get-KydrasLogPath {
+    [CmdletBinding()]
     param(
-        [string] = "Kydras"
+        [Parameter()]
+        [string]$AppName = "Kydras"
     )
-     = Join-Path C:\Users\kyler "Kydras-Logs"
-    if (-not (Test-Path )) {
-        New-Item -ItemType Directory -Force -Path  | Out-Null
+
+    $base = Join-Path $HOME "Kydras-Logs"
+
+    if (-not (Test-Path -Path $base)) {
+        New-Item -ItemType Directory -Path $base -Force | Out-Null
     }
-     = Join-Path  
-    if (-not (Test-Path )) {
-        New-Item -ItemType Directory -Force -Path  | Out-Null
+
+    $appDir = Join-Path $base $AppName
+
+    if (-not (Test-Path -Path $appDir)) {
+        New-Item -ItemType Directory -Path $appDir -Force | Out-Null
     }
-    return 
+
+    return $appDir
 }
 
-Export-ModuleMember -Function Say-Kydras,Get-KydrasWorkspace,Get-KydrasLogPath
+Export-ModuleMember -Function Say-Kydras, Get-KydrasWorkspace, Get-KydrasLogPath
