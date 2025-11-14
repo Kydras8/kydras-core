@@ -1,6 +1,6 @@
 # ================================
 # Kydras.Core.psm1
-# Version: 1.1.1 (Path-only, no LiteralPath)
+# Version: 1.2.0 (Log root moved to D:\)
 # ================================
 
 Set-StrictMode -Version Latest
@@ -17,25 +17,25 @@ function Say-Kydras {
 function Get-KydrasWorkspace {
     [CmdletBinding()]
     param(
-        [Parameter()]
         [string]$DefaultPath = "$HOME\Kydras-Repos"
     )
 
     if (Test-Path -Path $DefaultPath) {
         return (Resolve-Path -Path $DefaultPath).Path
     }
-
     return $HOME
 }
 
 function Get-KydrasLogPath {
     [CmdletBinding()]
     param(
-        [Parameter()]
         [string]$AppName = "Kydras"
     )
 
-    $base = Join-Path $HOME "Kydras-Logs"
+    #
+    # ===== PRIMARY CHANGE: logs now under D:\Users\kyler\Kydras-Logs =====
+    #
+    $base = "D:\Users\kyler\Kydras-Logs"
 
     if (-not (Test-Path -Path $base)) {
         New-Item -ItemType Directory -Path $base -Force | Out-Null
