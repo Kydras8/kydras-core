@@ -1,0 +1,11 @@
+* text=auto eol=lf
+
+*.ps1 text working-tree-encoding=UTF-8
+*.psm1 text working-tree-encoding=UTF-8
+*.cs text
+*.ts text
+*.js text
+*.json text
+*.yml text
+*.yaml text
+*.md text
