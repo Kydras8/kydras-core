@@ -1,3 +1,11 @@
+<!-- Kydras Repo Header -->
+<p align="center">
+  <strong>Kydras Systems Inc.</strong><br/>
+  <em>Nothing is off limits.</em>
+</p>
+
+---
+
 # kydras-core — Kydras Systems Inc.
 
 Central shared assets, templates, and tooling for the Kydras ecosystem.
@@ -12,3 +20,4 @@ Central shared assets, templates, and tooling for the Kydras ecosystem.
 ## License
 
 Apache-2.0. See LICENSE for details.
+
